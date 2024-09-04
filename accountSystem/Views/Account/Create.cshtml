@@ -1,0 +1,51 @@
+﻿@model Application.Dto.AccountDto
+
+@{
+    ViewData["Title"] = "Create New Account";
+}
+
+<h1 class="text-center">Create New Account</h1>
+<hr />
+
+<section class="row justify-content-around">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="form-group mb-3">
+                <label class="text-muted" asp-for="AccountNumber">Account Number</label>
+                <input asp-for="AccountNumber" class="form-control" required maxlength="20" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="text-muted" asp-for="OpeningBalance">Opening Balance</label>
+                <input asp-for="OpeningBalance" class="form-control" type="number" required step="0.01" />
+                <span asp-validation-for="OpeningBalance" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check mb-3">
+                <input type="hidden" name="IsActive" value="false" />
+                <input asp-for="IsActive" class="form-check-input" value="true" />
+                <label asp-for="IsActive" class="form-check-label">Is Active</label>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="text-muted" asp-for="AccountType">Account Type</label>
+                <input asp-for="AccountType" class="form-control" required />
+                <span asp-validation-for="AccountType" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4">
+                <i class="bi bi-check-circle"></i> Save
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary mt-4">
+                 <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

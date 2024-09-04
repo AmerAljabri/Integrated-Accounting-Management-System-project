@@ -1,0 +1,39 @@
+﻿@model IEnumerable<accountSystem.Domain.Entities.LedgerEntry>
+
+@{
+    ViewData["Title"] = "Ledger Entries";
+}
+
+<div style="margin-left:30px;">
+    <h2>Ledger Entries</h2>
+
+    <div>
+        <h3>Ledger Summary</h3>
+        <p>Total Debits: @ViewBag.Summary.TotalDebits.ToString("C")</p>
+        <p>Total Credits: @ViewBag.Summary.TotalCredits.ToString("C")</p>
+        <p>Balance: @ViewBag.Summary.Balance.ToString("C")</p>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Amount</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model)
+            {
+                <tr>
+                    <td>@entry.CreatedAt.ToString("yyyy-MM-dd")</td>
+                    <td>@entry.Account.AccountNumber</td>
+                    <td>@entry.Amount.ToString("C")</td>
+                    <td>@(entry.IsDebit ? "Debit" : "Credit")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

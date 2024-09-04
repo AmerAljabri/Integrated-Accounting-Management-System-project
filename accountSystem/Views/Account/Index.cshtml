@@ -1,0 +1,72 @@
+﻿
+@model IEnumerable<Application.Dto.AccountDto>
+
+<h1 style="margin-left: 30px;">Accounts</h1>
+
+<!-- عرض رسائل الأخطاء -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+
+<table class="table" style="margin-left: 30px;">
+    <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Balance</th>
+            <th>AccountType</th>
+            <th>Is Active</th>
+            <th>Actions</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model)
+        {
+            <tr>
+                <td>@account.AccountNumber</td>
+                <td>@account.CurrentBalance</td>
+                <td>@account.AccountType</td>
+                <td>@(account.IsActive ? "0" : "1")</td>
+                <td>
+                    @if (account.IsActive)
+                    {
+                        <form asp-action="Deactivate" method="post" style="display:inline;">
+                            <input type="hidden" name="accountId" value="@account.AccountId" />
+                            <button type="submit" class="btn btn-danger">Inactivate</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="Activate" method="post" style="display:inline;">
+                            <input type="hidden" name="accountId" value="@account.AccountId" />
+                            <button type="submit" class="btn btn-primary">Activate</button>
+                        </form>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Account", new { id = account.AccountId })" class="btn btn-warning test">Edit</a>
+                    <form asp-action="Delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this account? This action cannot be undone.');">
+                        <input type="hidden" name="accountId" value="@account.AccountId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="margin-left: 30px;">
+    <!-- زر لنقلك إلى صفحة إنشاء حساب جديد -->
+    <a href="@Url.Action("Create", "Account")" class="btn btn-primary"><i class="bi bi-x">Add Account</i></a>
+
+    <!-- زر لتوليد التقرير -->
+    <a href="@Url.Action("ReportView", "Report")" class="btn btn-secondary">Generate Report</a>
+
+</div>

@@ -1,0 +1,48 @@
+﻿@model Application.Dto.AccountDto
+
+@{
+    ViewData["Title"] = "Edit Account";
+}
+
+<div style="margin-left:30px;">  
+    <h1>Edit Account</h1>
+
+    <!-- عرض رسائل الأخطاء -->
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" name="accountId" value="@Model.AccountId" />
+
+        <div class="form-group">
+            <label>Account Number</label>
+            <input type="text" name="accountNumber" class="form-control" value="@Model.AccountNumber" required />
+        </div>
+
+        <div class="form-group">
+            <label>Opening Balance</label>
+            <input type="number" name="openingBalance" class="form-control" value="@Model.OpeningBalance" step="0.01" required />
+        </div>
+
+        <div class="form-group">
+            <label>Account Type</label>
+            <input type="text" name="accountType" class="form-control" value="@Model.AccountType" required />
+        </div>
+
+        <div class="form-group">
+            <label>Is Active</label>
+            <input type="checkbox" name="isActive" @(Model.IsActive ? "checked" : "") />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="@Url.Action("Index", "Account")" class="btn btn-secondary">Cancel</a>
+    </form>
+
+</div>

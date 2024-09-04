@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<WarningLevel>4</WarningLevel>
+		<!-- تأكد من أن قيمة التحذير تتراوح بين 0 و 4 -->
+		<DebugType>full</DebugType>
+		<!-- ضبط وضع التصحيح ليكون "full" بدلاً من "portable" -->
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+	  
+  </ItemGroup>
+
+</Project>

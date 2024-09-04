@@ -1,0 +1,53 @@
+﻿@model List<accountSystem.Domain.Entities.TransactionAccount>
+
+@{
+    ViewData["Title"] = "Create Transaction";
+}
+
+<h1 class="text-center">Create Transaction</h1>
+
+<section class="row justify-content-center">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label>Transaction Type</label>
+                <input type="text" name="transactionType" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label>Transaction Date</label>
+                <input type="date" name="transactionDate" class="form-control" required />
+            </div>
+
+            <h3>Transaction Accounts</h3>
+            <div id="transaction-accounts">
+                @if (Model != null && Model.Count > 0)
+                {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        <div class="transaction-account">
+                            <div class="form-group">
+                                <label>Account</label>
+                                <select name="transactionAccounts[@i].AccountId" class="form-control">
+                                    @foreach (var account in ViewBag.Accounts)
+                                    {
+                                        <option value="@account.AccountId">@account.AccountNumber - @account.AccountType</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="number" name="transactionAccounts[@i].Amount" class="form-control" step="0.01" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Is Debit</label>
+                                <input type="checkbox" name="transactionAccounts[@i].IsDebit" />
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Transaction</button>
+        </form>
+    </div>
+</section>

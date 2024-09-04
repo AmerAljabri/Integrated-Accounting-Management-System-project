@@ -1,0 +1,20 @@
+﻿@model IEnumerable<accountSystem.Application.Services.AccountBalanceDto>
+
+<h2>Account Balances</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Current Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model)
+        {
+            <tr>
+                <td>@account.AccountNumber</td>
+                <td>@account.CurrentBalance</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<accountSystem.Domain.Entities.TransactionAccount>
+
+<h2>Account Activities</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Transaction Date</th>
+            <th>Amount</th>
+            <th>Is Debit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var activity in Model)
+        {
+            <tr>
+                <td>@activity.Transaction.TransactionDate</td>
+                <td>@activity.Amount</td>
+                <td>@(activity.IsDebit ? "Debit" : "Credit")</td>
+            </tr>
+        }
+    </tbody>
+</table>

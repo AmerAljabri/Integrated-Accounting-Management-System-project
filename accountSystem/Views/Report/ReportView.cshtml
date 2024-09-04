@@ -1,0 +1,44 @@
+﻿@model IEnumerable<accountSystem.Application.Services.AccountBalanceDto>
+
+@{
+    ViewData["Title"] = "Account Report";
+}
+
+<div style="margin-left: 30px;">
+    <h2>Generate Account Report</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                    <th>Account Type</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var account in Model)
+                {
+                    <tr>
+                        <td>@account.AccountNumber</td>
+                        <td>@account.CurrentBalance.ToString("C")</td>
+                        <td>@account.AccountType</td>
+                        <td>@(account.IsActive ? "Inactive" : "Active")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No account balances available.</p>
+    }
+
+    <div>
+        <h3>Select format:</h3>
+        <a href="@Url.Action("GenerateAccountReportPdf", "Report")" class="btn btn-primary">Download PDF</a>
+        <a href="@Url.Action("GenerateAccountReportExcel", "Report")" class="btn btn-primary">Download Excel</a>
+    </div>
+</div>

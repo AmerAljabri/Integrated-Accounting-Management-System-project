@@ -1,0 +1,45 @@
+﻿@model IEnumerable<accountSystem.Domain.Entities.Transaction>
+
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<h1 style="margin-left: 30px;">Transactions</h1>
+
+
+
+<table class="table" style="margin-left: 30px;">
+    <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                <td>@transaction.TransactionId</td>
+                <td>@transaction.TransactionType</td>
+                <td>@transaction.TransactionDate</td>
+                <td>
+                    @(transaction.TransactionAccounts != null
+                        ? transaction.TransactionAccounts.Sum(ta => ta.Amount)
+                        : 0)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = transaction.TransactionId })" class="btn btn-warning test">Edit</a> |
+                    <form asp-action="Delete" method="post" style="display:inline;" onsubmit="return confirm(''Are you sure you want to delete this transaction?');">
+                        <input type="hidden" name="accountId" value="@transaction.TransactionId" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a style="margin-left: 30px;" href="@Url.Action("Create")" class="btn btn-primary">Create New Transaction</a>

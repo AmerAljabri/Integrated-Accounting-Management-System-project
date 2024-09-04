@@ -1,0 +1,52 @@
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* CSS áÊÛííÑ áæä ÇáÃÒÑÇÑ ÈäÇÁğ Úáì ÍÇáÉ ÇáÍÓÇÈ */
+.btn-primary {
+    background-color: green;
+    border-color: green;
+}
+
+.btn-danger {
+    background-color: red;
+    border-color: red;
+}
+
+.btn:disabled {
+    opacity: 0.65; /* áÊæÖíÍ Ãä ÇáÒÑ ÛíÑ ãİÚá */
+    cursor: not-allowed;
+}
+.test {
+    background-color: green;
+    border-color: green;
+    color:white;
+}
+.sidebar {
+    height: 100vh; /* ÇÌÚá ÇÑÊİÇÚ ÇáÔÑíØ ÇáÌÇäÈí íÛØí ÇáÔÇÔÉ */
+    padding-top: 20px; /* ÅÖÇİÉ ÈÚÖ ÇáÍÔæÉ ãä ÇáÃÚáì */
+}
+.nav-item{
+    font-display:auto;
+    font:400;
+}
